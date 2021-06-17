@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table align="center" border="center">
+    <tr>
+        <th>
+            <form action="/savedata/" method="post">
+                {% csrf_token %}
+                <table align="center" border="2" bgcolor="#ff4500">
+                    <tr><th>Registration</th></tr>
+                    <tr><th><input type="number" placeholder="IDNO" required name="t1"></th></tr>
+                    <tr><th><input type="text" placeholder="NAME" required name="t2"></th></tr>
+                    <tr><th><input type="decimal" placeholder="SALARY" required name="t3"></th></tr>
+                    <tr><th><input type="date" placeholder="DATE" required name="t4"></th></tr>
+                    <tr><th>
+                        <select name="t5">
+                            <option>Developer</option>
+                            <option>Tester</option>
+                            <option>Team Leader</option>
+                            <option>Manager</option>
+                        </select>
+                    </th></tr>
+                    <tr><th><button type="submit">Save</button> </th></tr>
+                </table>
+            </form>
+        </th>
+        <td>
+            <table  border="2" bgcolor="#1e90ff">
+                <tr>
+                    <th>IDNO</th>
+                    <th>NAME</th>
+                    <th>SALARY</th>
+                    <th>DOJ</th>
+                    <th>DESIGNATION</th>
+                    <th>UPDATE</th>
+                    <th>DELETE</th>
+                </tr>
+                {% for x in data %}
+                    <tr>
+                        <th>{{ x.idno }}</th>
+                        <th>{{ x.name }}</th>
+                        <th>{{ x.salary }}</th>
+                        <th>{{ x.doj }}</th>
+                        <th>{{ x.designation }}</th>
+                        <th>
+                            <form action="/showupdate/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="t1" value="{{ x.idno }}">
+                                <button type="submit">UPDATE</button>
+                            </form>
+                        </th>
+                        <th>
+                            {% comment %}
+                               Sending Data in Hyperlink
+                            {% endcomment  %}
+                            <a href="/showdelete/?idno={{ x.idno }}">
+                                yes
+                            </a>
+                        </th>
+                    </tr>
+                {% endfor %}
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

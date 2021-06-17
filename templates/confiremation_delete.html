@@ -1,0 +1,18 @@
+<h4>IDNO:{{ data.idno }}</h4>
+<h4>NAME:{{ data.name }}</h4>
+<h4>SALARY:{{ data.salary }}</h4>
+<h4>doj:{{ data.doj }}</h4>
+<h4>DESIGNATION:{{ data.designation }}</h4>
+
+<h4>doyou want to  delete employee
+    <form action="/delete/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="t1" value="{{ data.idno }}">
+        <button type="submit">yes</button>
+    </form>
+</h4>
+
+<form action="/index/">
+    <button type="submit"> NO</button>
+</form>
+
